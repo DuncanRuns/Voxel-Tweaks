@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "voxel-tweaks",
+  "version": "${version}",
+  "name": "Voxel Tweaks",
+  "description": "Some personal tweaks to VoxelMap.",
+  "authors": [
+    "DuncanRuns"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/voxel-tweaks/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.duncanruns.voxeltweaks.VoxelTweaks"
+    ]
+  },
+  "mixins": [
+    "voxel-tweaks.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*",
+    "voxelmap": "*"
+  }
+}
