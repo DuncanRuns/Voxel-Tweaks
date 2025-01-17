@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import org.slf4j.Logger;
@@ -66,8 +67,20 @@ public class VoxelTweaks implements ModInitializer {
 
         coords[1] = coords[1] == Integer.MIN_VALUE ? (int) context.getSource().getPosition().y : coords[1];
 
-        DimensionContainer dimension = VoxelConstants.getVoxelMapInstance().getDimensionManager().getDimensionContainerByWorld(context.getSource().getWorld());
-        VoxelConstants.getVoxelMapInstance().getWaypointManager().setHighlightedWaypoint(new Waypoint("temp highlight", coords[0], coords[2], coords[1], false, 0, 0, 0, "", dimension.getStorageName(), new TreeSet<>(Collections.singletonList(dimension))), true);
+        ClientWorld world = context.getSource().getWorld();
+        double coordinateScale = world.getDimension().coordinateScale();
+        DimensionContainer dimension = VoxelConstants.getVoxelMapInstance().getDimensionManager().getDimensionContainerByWorld(world);
+        VoxelConstants.getVoxelMapInstance().getWaypointManager().setHighlightedWaypoint(new Waypoint(
+                        "temp highlight",
+                        MathHelper.floor(coords[0] * coordinateScale),
+                        MathHelper.floor(coords[2] * coordinateScale),
+                        coords[1],
+                        false,
+                        0, 0, 0, "",
+                        dimension.getStorageName(),
+                        new TreeSet<>(Collections.singletonList(dimension))
+                ),
+                true);
         return 1;
     }
 
@@ -81,8 +94,20 @@ public class VoxelTweaks implements ModInitializer {
 
         coords[1] = coords[1] == Integer.MIN_VALUE ? (int) context.getSource().getPosition().y : coords[1];
 
-        DimensionContainer dimension = VoxelConstants.getVoxelMapInstance().getDimensionManager().getDimensionContainerByWorld(context.getSource().getWorld());
-        VoxelConstants.getVoxelMapInstance().getWaypointManager().addWaypoint(new Waypoint(StringArgumentType.getString(context, "name"), coords[0], coords[2], coords[1], true, 1, 1, 1, "", dimension.getStorageName(), new TreeSet<>(Collections.singletonList(dimension))));
+        ClientWorld world = context.getSource().getWorld();
+        double coordinateScale = world.getDimension().coordinateScale();
+        DimensionContainer dimension = VoxelConstants.getVoxelMapInstance().getDimensionManager().getDimensionContainerByWorld(world);
+        VoxelConstants.getVoxelMapInstance().getWaypointManager().addWaypoint(new Waypoint(
+                StringArgumentType.getString(context, "name"),
+                MathHelper.floor(coords[0] * coordinateScale),
+                MathHelper.floor(coords[2] * coordinateScale),
+                coords[1],
+                true,
+                1, 1, 1,
+                "",
+                dimension.getStorageName(),
+                new TreeSet<>(Collections.singletonList(dimension))
+        ));
         return 1;
     }
 }
