@@ -6,7 +6,7 @@ functionality.
 
 Features/Changes:
 
-- Swap Y and Z position in the add/edit waypoint GUI to follow regular MC order
+- ~~Swap Y and Z position in the add/edit waypoint GUI to follow regular MC order~~ Merged into regular VoxelMap
 - Add a paste button to the add/edit waypoint GUI
     - This will take the first 3 numbers, floor them, and place them in boxes, or only place X and Z if 2 numbers are
       found.
