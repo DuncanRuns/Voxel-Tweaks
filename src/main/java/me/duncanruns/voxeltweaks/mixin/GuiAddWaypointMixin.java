@@ -1,13 +1,10 @@
 package me.duncanruns.voxeltweaks.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mamiyaotaru.voxelmap.gui.GuiAddWaypoint;
 import com.mamiyaotaru.voxelmap.gui.overridden.GuiScreenMinimap;
 import com.mamiyaotaru.voxelmap.gui.overridden.IPopupGuiScreen;
 import com.mamiyaotaru.voxelmap.gui.overridden.PopupGuiButton;
 import me.duncanruns.voxeltweaks.VoxelTweaks;
-import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
