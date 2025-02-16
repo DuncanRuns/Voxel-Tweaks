@@ -17,7 +17,7 @@ public abstract class GuiPersistentMapMixin {
     @Shadow
     private Text multiworldButtonName;
 
-    @Inject(method = "init", at = @At("TAIL"))
+    @Inject(method = "init", at = @At("TAIL"), remap = true)
     private void replaceRedText(CallbackInfo ci) {
         multiworldButtonNameRed = multiworldButtonName.copy();
     }
