@@ -49,24 +49,8 @@ public class VoxelTweaks implements ModInitializer {
         };
     }
 
-    @Override
-    public void onInitialize() {
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, commandRegistryAccess) -> {
-            dispatcher.register(ClientCommandManager.literal("vhighlight")
-                    .executes(c -> executeHighlightCommand(c, null))
-                    .then(ClientCommandManager.argument("input", StringArgumentType.greedyString())
-                            .executes(c -> executeHighlightCommand(c, StringArgumentType.getString(c, "input"))))
-            );
-            dispatcher.register(ClientCommandManager.literal("vwaypoint")
-                    .then(ClientCommandManager.argument("name", StringArgumentType.word())
-                            .executes(c -> executeWaypointCommand(c, null))
-                            .then(ClientCommandManager.argument("input", StringArgumentType.greedyString())
-                                    .executes(c -> executeWaypointCommand(c, StringArgumentType.getString(c, "input"))))));
-        });
-    }
-
     private static int executeHighlightCommand(CommandContext<FabricClientCommandSource> context, String input) {
-        if(input == null) input = context.getSource().getPosition().toString();
+        if (input == null) input = context.getSource().getPosition().toString();
         int[] coords = getCoords(input);
         if (coords == null) {
             context.getSource().sendError(Text.literal("Invalid input!"));
@@ -93,7 +77,7 @@ public class VoxelTweaks implements ModInitializer {
     }
 
     private static int executeWaypointCommand(CommandContext<FabricClientCommandSource> context, String input) {
-        if(input == null) input = context.getSource().getPosition().toString();
+        if (input == null) input = context.getSource().getPosition().toString();
         int[] coords = getCoords(input);
         if (coords == null) {
             context.getSource().sendError(Text.literal("Invalid input!"));
@@ -117,5 +101,21 @@ public class VoxelTweaks implements ModInitializer {
                 new TreeSet<>(Collections.singletonList(dimension))
         ));
         return 1;
+    }
+
+    @Override
+    public void onInitialize() {
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, commandRegistryAccess) -> {
+            dispatcher.register(ClientCommandManager.literal("vhighlight")
+                    .executes(c -> executeHighlightCommand(c, null))
+                    .then(ClientCommandManager.argument("input", StringArgumentType.greedyString())
+                            .executes(c -> executeHighlightCommand(c, StringArgumentType.getString(c, "input"))))
+            );
+            dispatcher.register(ClientCommandManager.literal("vwaypoint")
+                    .then(ClientCommandManager.argument("name", StringArgumentType.word())
+                            .executes(c -> executeWaypointCommand(c, null))
+                            .then(ClientCommandManager.argument("input", StringArgumentType.greedyString())
+                                    .executes(c -> executeWaypointCommand(c, StringArgumentType.getString(c, "input"))))));
+        });
     }
 }
