@@ -16,6 +16,7 @@ Features/Changes:
     - ex: `/vhighlight 150 65 150`
 - The commands take the same kind of input as the new paste button, since it will take any 3 numbers it finds, it is
   compatible with what the F3+C shortcut puts in the clipboard.
+- Remove annoying multiworld popups and red flashing text in full map.
 
 ## Developing/Building
 
